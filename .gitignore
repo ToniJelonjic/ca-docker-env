@@ -1,0 +1,4 @@
+data/app/
+data/mysql/
+data/db-data
+logs/*

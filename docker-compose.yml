@@ -1,0 +1,35 @@
+services:
+  nginx:
+    image: nginx:latest
+    hostname: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./data/app:/var/www/app
+  php:
+    image: adhocore/phpfpm:7.4
+    hostname: php
+    volumes:
+      - ./data/app:/var/www/app
+    environment:
+      - SYMFONY_ENV=prod
+      - MAX_UPLOAD=10M
+      - PHP_MAX_POST=10M
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=mariola
+      - MYSQL_DATABASE=terminali
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    hostname: phpmyadmin
+    environment:
+      - VIRTUAL_HOST=pma
+      - PMA_HOSTS=mysql
+    ports:
+      - 88:80
