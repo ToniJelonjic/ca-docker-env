@@ -9,7 +9,7 @@ services:
       - ./logs/nginx:/var/log/nginx
       - ./data/app:/var/www/app
   php:
-    image: adhocore/phpfpm:7.4
+    build: ./docker-files/php-fpm
     hostname: php
     volumes:
       - ./data/app:/var/www/app

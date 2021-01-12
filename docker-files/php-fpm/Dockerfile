@@ -4,3 +4,4 @@ RUN apk update && apk upgrade && \
     apk add --no-cache git
 
 WORKDIR /var/www/app
+
